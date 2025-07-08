@@ -2,9 +2,9 @@ name: Build Magisk Module ZIP
 
 on:
   push:
-    branches: [ main, master ] # Ana branch'de tetikle
+    branches: [ main, master ]
   release:
-    types: [created] # Yeni release oluşturulunca tetikle
+    types: [created]
 
 jobs:
   build:
@@ -12,28 +12,38 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4  # Güncel sürüm
 
     - name: Setup ZIP tool
-      run: sudo apt install zip -y # ZIP kurulumu
+      run: sudo apt install zip -y
 
     - name: Create module directory
-      run: mkdir -p module # Modül dosyalarını koyacağınız klasör
+      run: mkdir -p module
 
     - name: Copy necessary files
       run: |
-        cp -r META-INF module/ # Magisk dosyaları
-        cp -r system module/   # Sistem dosyaları
-        cp README.md module/   # Dokümantasyon
-        cp LICENSE module/     # Lisans
+        cp -r META-INF module/
+        cp -r system module/
+        cp README.md module/
+        cp LICENSE module/
 
     - name: Create ZIP archive
       run: |
         cd module
-        zip -r ../AdGuardHome-Module-${{ github.run_id }}.zip . # Dinamik isimle ZIP oluştur
+        zip -r ../AdGuardHome-Module-${{ github.run_id }}.zip .
 
+    # DÜZELTME: upload-artifact v4'e güncellendi
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4  # v3 yerine v4 kullanın
       with:
         name: magisk-module
         path: AdGuardHome-Module-${{ github.run_id }}.zip
+
+    # Opsiyonel: Release yüklemesi
+    - name: Upload to Release
+      if: ${{ github.event_name == 'release' }}
+      uses: softprops/action-gh-release@v1
+      with:
+        files: AdGuardHome-Module-${{ github.run_id }}.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
