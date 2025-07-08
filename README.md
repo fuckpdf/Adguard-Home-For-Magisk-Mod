@@ -1,45 +1,53 @@
-# Adguard Home For Android
-- 通过重定向并过滤DNS请求来屏蔽广告且带有模块系统的Root管理器通用
-- 在Twoone3的基础上增加了IFW规则、删除/占用广告文件夹等方法禁用广告
-- 内置了8680的拦截规则并在此基础上增加了自定义规则
-- 重构了模块几乎所有的底层脚本，带来更低的延迟更好的性能以及功耗优化
-- 更新安装的时候一定要选择音量下，不然没法更新配置文件
-- 点此链接直接跳转到教程： [点击跳转](#%E6%95%99%E7%A8%8B%E4%B8%8D%E7%9C%8B%E7%9A%84%E8%AF%9D%E5%87%BA%E4%BA%8B%E5%88%AB%E5%88%B0%E5%A4%84%E6%89%BE%E6%88%91%E9%97%AE%E9%A2%98)
-# 风险提示，不看请别怪我没提醒
-- ⚠️模块会导致优惠券无法正常领取，如无法正常领取这并非误杀
-- ⚠️部分软件的看广告领金币无法正常领取，如无法使用这并非误杀
-- ⚠️例如百度等企业会将广告与金融产品绑定，如发现金融借贷类无法使用这并非误杀
-- ⚠️模块不可以与同类模块同时使用，更详细的请看教程那一栏
-- ⚠️模块无法拦截广告与内容为同一域名的，比如QQ、微信、支付宝等部分广告
-# 模块相比于其他的方案有哪些优点？
-- 相比于私人DNS有哪些优点？
-1. 私人dns需要不断的向服务器进行访问，一旦服务器超负荷或过载以及服务器连不上的话就会导致断网
-2. 由于私人dns需要向服务器进行访问，所以存在很大的网络延迟问题（因为需要向服务器请求过滤以后再返回到你的设备上）
-3. 私人DNS由于数据都交由服务器处理，存在的数据泄露的隐患（因为私人DNS的置信度不高）
-4. 数据都在本地处理，隐私保障性更高
-- 相比于Hosts有哪些优点？
-1. 数据都是加密传输，并且经过Doh
-2. 防止DNS劫持，防止网页被劫持的风险
-3. 不容易被检测，原因同第一点
-- 相比于李跳跳等无障碍跳过软件有哪些优点？
-1. 不用担心会掉后台，不用担心杀后台会导致无障碍失效等问题
-2. 不会因为无障碍而导致手机掉帧卡顿，因为无障碍跳过软件是实时扫描页面元素
-3. 轻量化运行不用担心耗电过快的问题
-4. 模块不存在应用包名被检测的问题
-- 相比于Lsposed模块去广告有哪些优点？
-1. 不容易被检测到，因为Lsposed去广告插件需要Hook函数注入应用
-2. 本模块虽屏蔽精度不高，相比于此类插件屏蔽的广啊（因为此类模块只能屏蔽一个或十几个应用）
-# 教程，不看的话出事别到处找我问题
-- 一定要关闭或卸载其他广告拦截模块、代理模块、无障碍跳过软件、VPN代理去广告、浏览器自带广告拦截、私人DNS等等
-- 如果遇到广告拦截不掉的，请先尝试清除该应用的全部缓存并杀掉后台重试（如果再不行的话，清除该应用的全部数据后重试）
-- 如果你使用的是Magisk框架，那么点击模块旁边的操作按钮就可以进入Web UI管理器
-- 使用Chash Meta导致无法正常过滤的，可以去Chash Meta设置-网络中关闭系统代理（我测试依然可以正常代理，并且广告可以过滤了）
-- 测速：https://test.ustc.edu.cn/
-- 测试广告拦截率（达到96%或以上是正常）：https://paileactivist.github.io/toolz/adblock.html
-# 获取联系方式
-- 聊天闲聊群：[点击链接加入群聊](https://qun.qq.com/universal-share/share?ac=1&authKey=l2FNOfui75SDr9n8qTfNjibiF1aTpQ%2B0cmJrw7iKnj%2B95dyExNG5LrdCJu5%2FEKrQ&busi_data=eyJncm91cENvZGUiOiI3NDY2NDA0NjQiLCJ0b2tlbiI6ImhOUWgzVTFPYnRUcEw1ZEJ1TnhkOGI4b0ZQSFV6cmtuVkludk5EcDR4WTFXSU5PelVmdnZoUHIwOGEreHVnNEYiLCJ1aW4iOiIzMzEzODI0NTc1In0%3D&data=8QbRVdmvcvuIPhoaZYMQRNm8tdG9QvQ_d6dLJvGEW_XEOWLbexxs8SgTRPfW51Tpe7IGWAu3PpizEpFa9oO1LQ&svctype=4&tempid=h5_group_info)
-- 反馈测试群：[点击链接加入群聊](https://qun.qq.com/universal-share/share?ac=1&authKey=xuYEMvAvyzLDhQ58xxwN71dyblHMrMB9YSG4ZpFpKrFz1NT4WdL19uSE4XJE1dt6&busi_data=eyJncm91cENvZGUiOiI1ODQwNjM0NDMiLCJ0b2tlbiI6Im9aM2R1ejBUeDJSWDVJaWNFdmE3bE5YdDdUam5OczZ3R2Z1MmFrYTlpZXNGV2EySFlZRVQrQ0NDOEhoSGZhTHEiLCJ1aW4iOiIzMzEzODI0NTc1In0%3D&data=e5gCMNYudfN2GeBXHTj6s3dwh37WNTWTcpws90_eZ_huBBXuanzL6MQ1FvfjRxLxN3oraEJUF8QAhN0oYAErKA&svctype=4&tempid=h5_group_info)
-# 鸣谢项目名单
+# Android için Adguard Home
+- DNS isteklerini yeniden yönlendirerek ve filtreleyerek reklam engelleyen ve modül sistemiyle çalışan kök yöneticiye sahip
+- Twoone3'e göre IFW kuralları eklenmiş, reklam klasörleri silinmiş/işgal edilmiş
+- 8680 adet engelleme kuralı entegre edilmiş ve özel kurallar eklenmiştir
+- Modülün neredeyse tüm alt komut dosyaları yeniden yapılandırılmış, daha düşük gecikme, daha iyi performans ve enerji optimizasyonu sağlar
+- Yükleme veya güncelleme sırasında ses düğmesini aşağıya basarak ilerlemek zorundasınız, aksi takdirde yapılandırma dosyaları güncellenmez
+- [Tıklayarak öğreticiye geçin](#%C3%96%C4%9Freticiyi-Okumazsan%C4%B1z-Yap%C4%B1lan-Hatalar-Benim-Sorumlulu%C4%9Fumda-De%C4%9Fildir)
+
+# Risk Uyarısı, Okumazsanız Sorumluluk Kabul Etmem
+- ⚠️ Modül kuponların normal şekilde kullanılmasını engelleyebilir, kullanılamaması durumu "yanlışlıkla engelleme" değildir
+- ⚠️ Bazı uygulamalarda reklama karşılık jeton alma özelliği çalışmayabilir, bu da "yanlışlıkla engelleme" değildir
+- ⚠️ Örneğin Baidu gibi şirketler reklamları finansal ürünlere bağlamış olabilir, finansal kredi işlemleri çalışmıyorsa bu "yanlışlıkla engelleme" değildir
+- ⚠️ Modül aynı türden diğer modüllerle birlikte kullanılmamalıdır, daha fazla bilgi için "Öğretici" bölümüne bakınız
+- ⚠️ Modül QQ, WeChat, Alipay gibi aynı alan adına sahip reklam ve içerikleri engelleyemez
+
+# Modül Diğer Yöntemlere Göre Ne Avantaj Sağlar?
+### Özel DNS'e göre avantajları:
+1. Özel DNS sunucuları sürekli olarak erişim gerektirdiği için sunucu aşırı yüklenirse veya bağlantı koparsa internet kesintisi yaşanabilir
+2. Özel DNS'e erişim gerektiği için yüksek ağ gecikmeleri yaşanabilir (sunucudan filtreleme sonrası cihazınıza dönüşte)
+3. Tüm veriler sunucuda işlendiği için veri sızıntısı riski vardır (özel DNS güvenilirliği düşük olabilir)
+4. Veriler yerel olarak işlendiği için gizlilik daha yüksek
+
+### Hosts'a göre avantajları:
+1. Veriler şifreli olarak iletilir ve DoH (DNS over HTTPS) ile korunur
+2. DNS yönlendirmesine karşı koruma sunar, web sayfalarının yönlendirilmesini engeller
+3. Tespit edilme riski düşüktür, çünkü ilk maddedeki gibi şifreli iletim yapılır
+
+### Lih跳跳 (Lih Tiaotiao) gibi engelsiz atlama yazılımlarına göre avantajları:
+1. Arka plana geçme veya arka plan uygulamasının kapatılması engelsiz atlama özelliğini etkilemez
+2. Gerçek zamanlı sayfa öğeleri taranmadığı için telefonunuzun kare hızında düşüş yaşanmaz
+3. Hafif çalıştığı için pil tüketimi konusunda endişe yoktur
+4. Uygulama paket adı tespiti sorunu yoktur
+
+### Lsposed reklam engelleme modüllerine göre avantajları:
+1. Lsposed modülleri uygulamalara fonksiyon enjekte ederek çalıştığı için tespit edilme riski düşüktür
+2. Bu modül reklam engelleme hassasiyeti düşük olsa da bu modüller yalnızca birkaç uygulamayı engelleyebilirken, bu modül çok daha fazlasını kapsar
+
+# Öğretici, Okumazsanız Yapılan Hatalar Benim Sorumluluğumda Değildir
+- Diğer reklam engelleyici modüller, proxy modülleri, engelsiz atlama yazılımları, VPN proxy reklam engelleyiciler, tarayıcı içi reklam engelleyiciler, özel DNS vs. tüm bunları kapatın veya kaldırın
+- Reklamlar engellenmiyorsa öncelikle ilgili uygulamanın tüm önbelleğini temizleyip arka planı kapatıp yeniden deneyin (hala engellenmiyorsa, uygulamanın tüm verilerini silip yeniden deneyin)
+- Eğer Magisk kullanıyorsanız modülün yanındaki işlem düğmesine basarak Web UI yönetim paneline erişebilirsiniz
+- Chash Meta kullanıyorsanız ve filtreleme çalışmıyorsa Chash Meta ayarları > Ağ kısmından sistem proxy'sini kapatın (testlerimde yine proxy çalışmaya devam etti ve reklamlar filtrelendi)
+- Hız testi: https://test.ustc.edu.cn/
+- Reklam engelleme testi (engelleme oranı %96 veya üzeri normaldir): https://paileactivist.github.io/toolz/adblock.html
+
+# İletişim Bilgileri
+- Sohbet Grubu: [Gruba Katılın](https://qun.qq.com/universal-share/share?ac=1&authKey=l2FNOfui75SDr9n8qTfNjibiF1aTpQ%2B0cmJrw7iKnj%2B95dyExNG5LrdCJu5%2FEKrQ&busi_data=eyJncm91cENvZGUiOiI3NDY2NDA0NjQiLCJ0b2tlbiI6ImhOUWgzVTFPYnRUcEw1ZEJ1TnhkOGI4b0ZQSFV6cmtuVkludk5EcDR4WTFXSU5PelVmdnZoUHIwOGEreHVnNEYiLCJ1aW4iOiIzMzEzODI0NTc1In0%3D&data=8QbRVdmvcvuIPhoaZYMQRNm8tdG9QvQ_d6dLJvGEW_XEOWLbexxs8SgTRPfW51Tpe7IGWAu3PpizEpFa9oO1LQ&svctype=4&tempid=h5_group_info)
+- Test ve Geri Bildirim Grubu: [Gruba Katılın](https://qun.qq.com/universal-share/share?ac=1&authKey=xuYEMvAvyzLDhQ58xxwN71dyblHMrMB9YSG4ZpFpKrFz1NT4WdL19uSE4XJE1dt6&busi_data=eyJncm91cENvZGUiOiI1ODQwNjM0NDMiLCJ0b2tlbiI6Im9aM2R1ejBUeDJSWDVJaWNFdmE3bE5YdDdUam5OczZ3R2Z1MmFrYTlpZXNGV2EySFlZRVQrQ0NDOEhoSGZhTHEiLCJ1aW4iOiIzMzEzODI0NTc1In0%3D&data=e5gCMNYudfN2GeBXHTj6s3dwh37WNTWTcpws90_eZ_huBBXuanzL6MQ1FvfjRxLxN3oraEJUF8QAhN0oYAErKA&svctype=4&tempid=h5_group_info)
+
+# Teşekkür Edilen Projeler
 - [AdguardHome_magisk](https://github.com/410154425/AdGuardHome_magisk)
 - [akashaProxy](https://github.com/ModuleList/akashaProxy)
 - [box_for_magisk](https://github.com/taamarin/box_for_magisk)
