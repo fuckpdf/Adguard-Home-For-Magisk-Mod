@@ -1,4 +1,4 @@
-# Android için Adguard Home
+# Android için Adguard Homee
 - Root yöneticisi için reklamları engelleyen ve modül sistemiyle DNS isteklerini yönlendirip filtreleyen bir araç.
 - Twoone3 temelinde IFW kuralları, reklam klasörlerini silme/işgal etme gibi yöntemlerle reklamları devre dışı bırakma.
 - 8680'in engelleme kurallarını içerir ve buna ek olarak özel kurallar eklenmiştir.
