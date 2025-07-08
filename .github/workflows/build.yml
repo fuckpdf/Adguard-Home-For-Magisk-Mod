@@ -2,48 +2,26 @@ name: Build Magisk Module ZIP
 
 on:
   push:
-    branches: [ main, master ]
-  release:
-    types: [created]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4  # Güncel sürüm
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Setup ZIP tool
-      run: sudo apt install zip -y
+      - name: Install zip
+        run: sudo apt-get install zip
 
-    - name: Create module directory
-      run: mkdir -p module
+      - name: Create ZIP file
+        run: zip -r magisk-module.zip *
 
-    - name: Copy necessary files
-      run: |
-        cp -r META-INF module/
-        cp -r system module/
-        cp README.md module/
-        cp LICENSE module/
-
-    - name: Create ZIP archive
-      run: |
-        cd module
-        zip -r ../AdGuardHome-Module-${{ github.run_id }}.zip .
-
-    # DÜZELTME: upload-artifact v4'e güncellendi
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4  # v3 yerine v4 kullanın
-      with:
-        name: magisk-module
-        path: AdGuardHome-Module-${{ github.run_id }}.zip
-
-    # Opsiyonel: Release yüklemesi
-    - name: Upload to Release
-      if: ${{ github.event_name == 'release' }}
-      uses: softprops/action-gh-release@v1
-      with:
-        files: AdGuardHome-Module-${{ github.run_id }}.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload ZIP to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: magisk-module.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
