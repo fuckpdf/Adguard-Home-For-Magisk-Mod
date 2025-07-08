@@ -1,7 +1,3 @@
-İşte kullanıcının sorgusunun Türkçe çevirisi, düşünme izinden yararlanılarak eksiksiz ve kendi kendine yeterli bir şekilde hazırlanmıştır:
-
----
-
 # Android için Adguard Home
 - Root yöneticisi için reklamları engelleyen ve modül sistemiyle DNS isteklerini yönlendirip filtreleyen bir araç.
 - Twoone3 temelinde IFW kuralları, reklam klasörlerini silme/işgal etme gibi yöntemlerle reklamları devre dışı bırakma.
