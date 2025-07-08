@@ -1,0 +1,39 @@
+name: Build Magisk Module ZIP
+
+on:
+  push:
+    branches: [ main, master ] # Ana branch'de tetikle
+  release:
+    types: [created] # Yeni release oluşturulunca tetikle
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup ZIP tool
+      run: sudo apt install zip -y # ZIP kurulumu
+
+    - name: Create module directory
+      run: mkdir -p module # Modül dosyalarını koyacağınız klasör
+
+    - name: Copy necessary files
+      run: |
+        cp -r META-INF module/ # Magisk dosyaları
+        cp -r system module/   # Sistem dosyaları
+        cp README.md module/   # Dokümantasyon
+        cp LICENSE module/     # Lisans
+
+    - name: Create ZIP archive
+      run: |
+        cd module
+        zip -r ../AdGuardHome-Module-${{ github.run_id }}.zip . # Dinamik isimle ZIP oluştur
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: magisk-module
+        path: AdGuardHome-Module-${{ github.run_id }}.zip
